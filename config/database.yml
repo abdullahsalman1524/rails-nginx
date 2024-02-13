@@ -18,10 +18,18 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: localhost
+  port: 5432
+  username: root
+  password: 6593
 
 development:
   <<: *default
   database: your_app_name_development
+  host: localhost
+  port: 5432
+  username: root
+  password: 6593
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -80,5 +88,7 @@ test:
 production:
   <<: *default
   database: your_app_name_production
-  username: your_app_name
-  password: <%= ENV["YOUR_APP_NAME_DATABASE_PASSWORD"] %>
+  host: localhost
+  port: 5432
+  username: root
+  password: 6593
