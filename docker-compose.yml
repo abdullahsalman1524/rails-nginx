@@ -8,7 +8,7 @@ services:
     command:
       "postgres -c 'max_connections=500'"
     environment:
-      - POSTGRES_DB = bugzilla_app_production
+      - POSTGRES_DB=your_app_name_production
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=6593
     ports:
@@ -18,16 +18,48 @@ services:
     command: "./bin/rails server"
     environment:
       - POSTGRES_HOST=db
-      - POSTGRES_DB=bugzilla_app_production
+      - POSTGRES_DB=your_app_name_production
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=6593
-      - RAILS_MASTER_KEY=15e0800f3222aa8921380402084740a6
+      - RAILS_MASTER_KEY=d885d64722a32a901f850bf58eb838a5
     volumes:
       - app-storage:/rails/storage
     depends_on:
       - db
     ports:
-      - "3000:3000"
+      - "3005:3000"
+
+  demo-web-2:
+    build: .
+    command: "./bin/rails server -p 3000"
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_DB=your_app_name_production
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=6593
+      - RAILS_MASTER_KEY=d885d64722a32a901f850bf58eb838a5
+    volumes:
+      - app-storage:/rails/storage
+    depends_on:
+      - db
+    ports:
+      - "3002:3000"  # Expose Rails app on port 3002
+
+  demo-web-3:
+    build: .
+    command: "./bin/rails server -p 3000"
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_DB=your_app_name_production
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=6593
+      - RAILS_MASTER_KEY=d885d64722a32a901f850bf58eb838a5
+    volumes:
+      - app-storage:/rails/storage
+    depends_on:
+      - db
+    ports:
+      - "3003:3000"
 
 volumes:
   postgres_data: {}
